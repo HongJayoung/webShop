@@ -10,5 +10,5 @@
 <h1>!!!로그인 성공!!!</h1>
 <h2>DB접속 후 다시 수정하기</h2>
 <h2><%=request.getParameter("userid") %></h2>
-<h2>${param.userid}</h2>
+<h2>${param.userid}</h2> 
 </body>

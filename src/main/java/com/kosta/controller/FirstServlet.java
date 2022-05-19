@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class FirstServlet
  */
 
-//요청주소 다양하게 가능
+//요청주소 다양하게 가능 
 @WebServlet({"/FirstServlet","/first","/first2.do","/kosta/first3.do"})
 public class FirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
