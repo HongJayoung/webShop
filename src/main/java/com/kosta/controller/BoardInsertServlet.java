@@ -3,6 +3,7 @@ package com.kosta.controller;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +19,11 @@ public class BoardInsertServlet extends HttpServlet {
 
 	//입력form 보여주기
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//ServletContext에 저장된 정보 얻기
+		ServletContext app = getServletContext();
+		String my = (String)app.getAttribute("myname");
+		System.out.println("app에 저장된 정보 : "+my);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("boardInsert.jsp");
 		rd.forward(request, response);
 	}
@@ -34,12 +40,18 @@ public class BoardInsertServlet extends HttpServlet {
 		BoardService service = new BoardService();
 		int result = service.newBoard(board);
 		
+		//Redirect : 주소창을 바꾼다
+		//forward : 주소창을 바꾸지 않는다. 요청과 응답이 다른문서
+		response.sendRedirect("boardlist.do");
+		
+		/*
 		String msg = "등록실패";
 		if(result > 0) msg = "등록성공";
-		
 		request.setAttribute("msg", msg);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("result.jsp");
 		rd.forward(request, response);
+		*/
 	}
 
 }

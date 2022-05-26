@@ -16,6 +16,7 @@ table, td {
 </head>
 <body>
 <h1>BOARD LIST</h1>
+<h3>application 정보 얻기 ${myname}</h3>
 <a href="boardInsert.do">게시글 작성하기</a>
 <br><br>
 <table>
@@ -26,6 +27,7 @@ table, td {
 		<td>작성자</td>
 		<td>작성일</td>
 		<td>수정일</td>
+		<td></td>
 	</tr>
 	<c:forEach items="${boardDatas}" var="board">
 	<tr>
@@ -35,8 +37,22 @@ table, td {
 		<td>${board.writer}</td>
 		<td>${board.regdate}</td>
 		<td>${board.updatedate}</td>
+		<td><button class="btnDel" data-bno="${board.bno}">삭제하기</button></td>
 	</tr>
 	</c:forEach>
 </table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(function() {
+	//#은 id, id는 문서 내에서 유일
+	//.은 class
+	$(".btnDel").click(function() {
+		var bno = $(this).attr("data-bno");
+		if(confirm(bno + "번 삭제?")) {
+			location.href = "boardDelete.do?bno="+bno;
+		}
+	})
+});
+</script>
 </body>
 </html>

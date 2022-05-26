@@ -1,8 +1,10 @@
 package com.kosta.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kosta.dto.EmpVO;
+import com.kosta.dto.JobVO;
 
 //사용자요청-->Controller-->Service-->DAO-->DB
 //	 	<--			  <--		<--	  <--
@@ -60,5 +62,15 @@ public class EmpService {
 	//11.delete(조건 department_id=?)
 	public int empDeleteByDept(int deptid) {
 		return empDAO.empDeleteByDept(deptid);
+	}
+	
+	//12.모든직책조회
+	public List<JobVO> selectAllJob() {
+		return empDAO.selectAllJob();
+	}
+	
+	//13.모든매니저조회
+	public Map<Integer, String> selectAllMgr() {
+		return empDAO.selectAllMgr();
 	}
 }

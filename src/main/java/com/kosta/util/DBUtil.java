@@ -6,8 +6,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBUtil {
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
+public class DBUtil {
+	public static Connection getConnection() {
+		Context initContext;
+		Connection conn = null;
+		try {
+			initContext = new InitialContext();
+			Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle"); //JNDI방식
+			conn = ds.getConnection();//Tomcat이 connection pooling에 연결한 connection 얻기
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return conn;
+	}
+
+	/*
 	public static Connection getConnection() {
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -24,6 +47,7 @@ public class DBUtil {
 		
 		return conn;
 	}
+	*/
 
 	
 	public static void dbClose(ResultSet rs, Statement st, Connection conn) {

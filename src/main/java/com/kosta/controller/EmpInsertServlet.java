@@ -3,6 +3,7 @@ package com.kosta.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,39 +14,42 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kosta.dto.DeptDTO;
 import com.kosta.dto.EmpVO;
+import com.kosta.dto.JobVO;
 import com.kosta.model.DeptService;
 import com.kosta.model.EmpService;
 import com.kosta.util.DateUtil;
 
 
-@WebServlet("/emp/empDetail.do")
-public class EmpDetailServlet extends HttpServlet {
+@WebServlet("/emp/empInsert.do")
+public class EmpInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String empid = request.getParameter("empid");
-		int i_empid = 0;
+		//부서목록 가져오기
+		DeptService dservice = new DeptService();
+		List<DeptDTO> dlist = dservice.selectAll();
+		request.setAttribute("dlist", dlist);
 		
-		if(empid != null) {
-			i_empid = Integer.parseInt(empid);
-		}
+		//직책목록 불러오기
+		EmpService eservice = new EmpService();
+		List<JobVO> jlist = eservice.selectAllJob();
+		request.setAttribute("jlist", jlist);
 		
-		EmpService service = new EmpService();
-		EmpVO emp =  service.selectById(i_empid);
-		request.setAttribute("emp", emp);
+		//매니저목록 불러오기
+		request.setAttribute("mgrlist", eservice.selectAllMgr()); 
 		
 		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("empDetail.jsp");
+		rd = request.getRequestDispatcher("empInsert.jsp");
 		rd.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//수정하기
+		//입력하기
 		request.setCharacterEncoding("utf-8");
 		EmpVO emp = makeEmp(request);
 		EmpService service = new EmpService();
-		int result = service.empUpdate(emp);
-		request.setAttribute("msg", result>0?"정보수정성공":"정보수정실패");
+		int result = service.empInsert(emp);
+		request.setAttribute("msg", result>0?"직원등록성공":"직업등록실패");
 		
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher("result.jsp");

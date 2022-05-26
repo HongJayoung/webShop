@@ -35,7 +35,7 @@ public class BoardDAO {
 	public List<BoardEmpVO> selectAllJoin() {
 		List<BoardEmpVO> boardlist = new ArrayList<>();
 		BoardEmpVO board = null;
-		conn = DBUtil.getConnection();
+		conn = DBUtil.getConnection(); //connection pooling이용 connection얻기
 		try {
 			pst = conn.prepareStatement(SQL_BOARD_EMP);
 			rs = pst.executeQuery();
@@ -47,7 +47,7 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.dbClose(rs, pst, conn);
+			DBUtil.dbClose(rs, pst, conn); 
 		}
 	
 		return boardlist;

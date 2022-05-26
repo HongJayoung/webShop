@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.kosta.dto.EmpVO;
+import com.kosta.dto.JobVO;
 import com.kosta.util.DBUtil;
 
 //CURD작업  insert(C), select(R), update(U), delete(D) => DAO(Data Access Object)
@@ -23,10 +26,13 @@ public class EmpDAO {
 	static final String SQL_INSERT = "insert into employees values(?,?,?,?,?,?,?,?,?,?,?)";
 	static final String SQL_UPDATE = "update employees set FIRST_NAME = ?, LAST_NAME = ?, EMAIL = ?,"
 						+ " PHONE_NUMBER = ?, HIRE_DATE =?, JOB_ID = ?, SALARY = ?, COMMISSION_PCT = ?,"
-						+ " MANAGER_ID =?, DEPARTMENT_ID = ? where employee_id = ?";
+						+ " MANAGER_ID = decode(?,0,null,?), DEPARTMENT_ID = ? where employee_id = ?";
 	static final String SQL_UPDATE_BY_DEPT = "update employees set SALARY = ?, COMMISSION_PCT = ? where department_id = ?";
 	static final String SQL_DELETE = "delete from employees where employee_id = ?";
 	static final String SQL_DELETE_BY_DEPT = "delete from employees where department_id = ?";
+	
+	static final String SQL_SELECT_ALL_MGR = "select employee_id, first_name from employees where employee_id in "
+						+ " (select distinct manager_id from employees)";
 	
 	Connection conn;
 	Statement st;
@@ -216,7 +222,7 @@ public class EmpDAO {
 		conn = DBUtil.getConnection();  
 		try {
 			pst = conn.prepareStatement(SQL_UPDATE);
-			pst.setInt(11, emp.getEmployee_id());
+			pst.setInt(12, emp.getEmployee_id());
 			pst.setString(1, emp.getFirst_name()); 
 			pst.setString(2, emp.getLast_name()); 
 			pst.setString(3, emp.getEmail()); 
@@ -226,7 +232,8 @@ public class EmpDAO {
 			pst.setDouble(7, emp.getSalary()); 
 			pst.setDouble(8, emp.getCommission_pct()); 
 			pst.setInt(9, emp.getManager_id()); 
-			pst.setInt(10, emp.getDepartment_id()); 
+			pst.setInt(10, emp.getManager_id()); 
+			pst.setInt(11, emp.getDepartment_id()); 
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -288,5 +295,46 @@ public class EmpDAO {
 		}
 	
 		return result;
+	}
+	
+	//12.모든직책조회
+	public List<JobVO> selectAllJob() {
+		List<JobVO> joblist = new ArrayList<>();
+		conn = DBUtil.getConnection();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery("select * from jobs order by 1");
+			
+			while(rs.next()) {
+				JobVO job = new JobVO(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getInt(4));
+				joblist.add(job);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(rs, st, conn);
+		}
+		
+		return joblist;
+	}
+	
+	//13.모든매니저조회
+	public Map<Integer, String> selectAllMgr() {
+		Map<Integer, String> mgrlist = new HashMap<>();
+		conn = DBUtil.getConnection();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(SQL_SELECT_ALL_MGR);
+			
+			while(rs.next()) {
+				mgrlist.put(rs.getInt(1),rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(rs, st, conn);
+		}
+		
+		return mgrlist;
 	}
 }
