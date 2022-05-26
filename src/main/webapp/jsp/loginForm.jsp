@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,9 @@
 </head>
 
 <body>
-<h1>LOGIN</h1> <hr>
+<h1>LOGIN</h1> 
+<%@ include file="../common/header.jsp" %>
+<hr>
 <form action="login.do" method="post">
 <div class="form-group">
 	<label>아이디 :</label><input class="form-control" type="text" name="userid">

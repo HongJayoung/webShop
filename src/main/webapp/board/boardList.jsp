@@ -6,19 +6,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
 table, td {
 	border:1px solid black;
 	border-collapse: collapse;
-	padding: 5px;
+	padding: 10px;
 }
+tr:first-child {
+	background-color: #E5E7FB;
+}
+table { 
+	margin: 30px;
+	clear:both;
+}
+h1 {
+	text-align: center;
+	padding: 20px;
+	margin: 10px;
+}
+.left {
+	float:left;
+	padding-left: 20px;
+}
+
 </style>
 </head>
 <body>
 <h1>BOARD LIST</h1>
-<h3>application 정보 얻기 ${myname}</h3>
-<a href="boardInsert.do">게시글 작성하기</a>
-<br><br>
+<hr>
+<div><span><a class="left" href="boardInsert.do">게시글 작성하기</a></span></div>
+<%@ include file="../common/header.jsp" %>
+
 <table>
 	<tr>
 		<td>번호</td>

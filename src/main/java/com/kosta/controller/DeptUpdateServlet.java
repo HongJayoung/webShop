@@ -17,7 +17,7 @@ public class DeptUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8"); //filter로 처리함
 		
 		int dept_id = Integer.parseInt(request.getParameter("dept_id"));
 		String dept_name = request.getParameter("dept_name");

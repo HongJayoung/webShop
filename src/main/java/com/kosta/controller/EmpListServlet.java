@@ -22,14 +22,6 @@ public class EmpListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("user");
-		if(user == null) {
-			System.out.println("로그인X...직원정보 열람불가");
-			response.sendRedirect("../html/login.do");
-			return;
-		}
-		
 		EmpService service = new EmpService();
 		List<EmpVO> list = service.selectAll();
 		

@@ -17,7 +17,9 @@
 </style>
 </head>
 <body>
-<h1>직원상세내역</h1> <hr>
+<h1>직원상세내역</h1>
+<%@ include file="../common/header.jsp" %>
+<hr>
 <form action="empDetail.do" method="post">
 <div class="form-group">
 	<label>직원번호 : ${emp.employee_id}</label>

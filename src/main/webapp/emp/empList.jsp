@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -20,13 +21,30 @@ table, td {
 tr:first-child {
 	background-color: #E5E7FB;
 }
-body{margin: 20px;}
+table { 
+	margin: 30px;
+	clear:both;
+}
+h1 {
+	text-align: center;
+	padding: 20px;
+	margin: 10px;
+}
+.left {
+	float:left;
+	padding-left: 20px;
+}
+
 </style>
 </head>
+
 <body>
 <h1>EMPLOYEE LIST</h1>
-<a href ="empInsert.do">신규등록</a>
 <hr>
+<div><span><a class="left" href ="empInsert.do">신규등록</a></span></div>
+<!-- ${pageContext.request.contextPath} -->
+<%@ include file="../common/header.jsp" %>
+
 <table>
 	<tr>
 		<td>직원번호</td>

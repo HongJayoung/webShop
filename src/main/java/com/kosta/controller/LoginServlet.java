@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.kosta.dto.UserVO;
 import com.kosta.model.UserService;
 
-@WebServlet("/html/login.do") 
+@WebServlet("/jsp/login.do") 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	RequestDispatcher rd = request.getRequestDispatcher("loginForm.html");
+    	RequestDispatcher rd = request.getRequestDispatcher("loginForm.jsp");
 		rd.forward(request, response);
     }
     
@@ -48,7 +48,8 @@ public class LoginServlet extends HttpServlet {
 			//로그인 실패 시 다시 로그인하도록
 			response.sendRedirect("login.do"); //get방식으로 감
 		}else {
-			response.sendRedirect("../emp/emplist.do");
+			String path = (String)session.getAttribute("reqPath");
+			response.sendRedirect(path);
 		}
 		
 		/*

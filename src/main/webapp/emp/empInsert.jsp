@@ -19,7 +19,9 @@
 
 </head>
 <body>
-<h1>NEW EMPLOYEE</h1> <hr>
+<h1>NEW EMPLOYEE</h1> 
+<%@ include file="../common/header.jsp" %>
+<hr>
 <form action="empInsert.do" method="post">
 <div class="form-group">
 	<label>직원번호 : </label>

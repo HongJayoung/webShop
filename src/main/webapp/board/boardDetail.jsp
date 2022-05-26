@@ -9,6 +9,7 @@
 <body>
 <h1>BOARD</h1>
 <hr>
+<%@ include file="../common/header.jsp" %>
 <form action="boardUpdate.do" method="post">
 번호 : ${board.getBno()}<input type="hidden" name="bno" value = "${board.getBno()}"> <br>
 제목 : <input type="text" name="title" value = "${board.getTitle()} "> <br>

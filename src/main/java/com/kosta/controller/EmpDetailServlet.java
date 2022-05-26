@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kosta.dto.DeptDTO;
 import com.kosta.dto.EmpVO;
+import com.kosta.dto.UserVO;
 import com.kosta.model.DeptService;
 import com.kosta.model.EmpService;
 import com.kosta.util.DateUtil;
@@ -41,7 +43,7 @@ public class EmpDetailServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//수정하기
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8"); //filter로 처리함
 		EmpVO emp = makeEmp(request);
 		EmpService service = new EmpService();
 		int result = service.empUpdate(emp);
