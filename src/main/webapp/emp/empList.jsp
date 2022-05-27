@@ -34,7 +34,7 @@ h1 {
 	float:left;
 	padding-left: 20px;
 }
-
+  hr {clear:both;}
 </style>
 </head>
 

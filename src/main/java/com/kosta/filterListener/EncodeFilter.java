@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 public class EncodeFilter implements Filter {
 
     public EncodeFilter() {
-        System.out.println("EncodeFilter 생성");
+        //System.out.println("EncodeFilter 생성");
     }
 
 	public void destroy() {
-		System.out.println("EncodeFilter 소멸");
+		//System.out.println("EncodeFilter 소멸");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -32,7 +32,7 @@ public class EncodeFilter implements Filter {
 		//System.out.println("getContextPath => "+req.getContextPath());
 		//System.out.println("getRequestURL => "+req.getRequestURL());
 		//System.out.println("getRequestURI => "+req.getRequestURI());
-		System.out.println("getServletPath => "+req.getServletPath());
+		//System.out.println("getServletPath => "+req.getServletPath());
 		//System.out.println("getServerPort => "+req.getServerPort());
 		
 		
@@ -41,6 +41,6 @@ public class EncodeFilter implements Filter {
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("EncodeFilter 초기화");
+		//System.out.println("EncodeFilter 초기화");
 	}
 }

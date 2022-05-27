@@ -15,6 +15,7 @@
   	body {margin: 20px;}
   	label {display:inline-block; width:150px;}
   	.form-control {display:inline-block; width:auto;}
+  	hr {clear:both;}
  </style>
 
 </head>

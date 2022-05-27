@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -16,24 +16,30 @@
   	.form-control {display:inline-block; width:auto;}
   	hr {clear:both;}
  </style>
+
 </head>
-
 <body>
-<h1>LOGIN</h1> 
-<%@ include file="../common/header.jsp" %>
+<h1>NEW BOARD</h1>
+
 <hr>
-<form action="login.do" method="post">
+<form action="boardInsertBeanTest2.jsp" method="post">
 <div class="form-group">
-	<label>아이디 :</label><input class="form-control" type="text" name="userid">
+	<label>제목 : </label>
+	<input class="form-control"  type="text" name="title" value = "">
 </div>
 
 <div class="form-group">
-	<label>비밀번호 :</label><input class="form-control" type="text" name="userpw">
+	<label>내용 : </label>
+	<input class="form-control"  type="text" name="content" value = "">
 </div>
 
-	<input type="hidden" name="user_email" value="1234@naver.com">
-	<input type="hidden" name="user_address" value="seoul">
-	<input class="btn btn-success" type="submit" value="로그인">
+<div class="form-group">
+	<label>작성자 : </label>
+	<input class="form-control"  type="text" name="writer" value = "100">
+</div>
+
+<input type="submit" class="btn btn-success" value="등록">
+<input type="reset" class="btn btn-secondary" value="취소">
 </form>
 </body>
 </html>

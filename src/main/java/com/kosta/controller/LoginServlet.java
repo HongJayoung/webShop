@@ -43,12 +43,13 @@ public class LoginServlet extends HttpServlet {
 		//세션 : 정보는 서버에 저장, 브라우저에 session id저장
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);
+		String path = (String)session.getAttribute("reqPath");
 		
 		if(user == null) {
 			//로그인 실패 시 다시 로그인하도록
 			response.sendRedirect("login.do"); //get방식으로 감
 		}else {
-			String path = (String)session.getAttribute("reqPath");
+			if(path==null) path = request.getContextPath() + "/index.jsp";
 			response.sendRedirect(path);
 		}
 		

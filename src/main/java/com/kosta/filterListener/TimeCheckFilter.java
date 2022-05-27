@@ -13,11 +13,11 @@ import javax.servlet.annotation.WebFilter;
 public class TimeCheckFilter implements Filter {
 
     public TimeCheckFilter() {
-    	System.out.println("TimeCheckFilter 생성");
+    	//System.out.println("TimeCheckFilter 생성");
     }
 
 	public void destroy() {
-		System.out.println("TimeCheckFilter 소멸");
+		//System.out.println("TimeCheckFilter 소멸");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -28,11 +28,11 @@ public class TimeCheckFilter implements Filter {
 		
 		//응답
 		long end = System.currentTimeMillis();
-		System.out.println("요청 수행하는데 걸린 시간 : " + (end - start) + "ms");
+		//System.out.println("요청 수행하는데 걸린 시간 : " + (end - start) + "ms");
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("TimeCheckFilter 초기화");
+		//System.out.println("TimeCheckFilter 초기화");
 	}
 
 }
