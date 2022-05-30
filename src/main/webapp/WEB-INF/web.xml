@@ -9,7 +9,16 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list> 
-  
+    
+  <!-- 모든 페이지에 header 추가 -->
+  <jsp-config>
+    <jsp-property-group>
+	  <url-pattern>*.jsp</url-pattern>
+	  <url-pattern>*.html</url-pattern>
+	  <include-prelude>/common/header.jsp</include-prelude>
+	</jsp-property-group>
+  </jsp-config>
+	
   <error-page>
   	<error-code>500</error-code>
   	<location>/error/errorPage_500.jsp</location>
@@ -80,6 +89,7 @@
   	<servlet-name>second</servlet-name>
   	<url-pattern>/bb</url-pattern>
   </servlet-mapping>
+
   
   <resource-ref>
 	 <description>Oracle Datasource example</description>

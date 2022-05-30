@@ -6,18 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
-table, td {
-	border:1px solid black;
-	border-collapse: collapse;
-	padding: 5px;
+tr:nth-child(odd) {
+	background-color: #FFF9DD;
 }
 </style>
+
+<link rel="stylesheet" href="../css/listCommon.css">
+
 </head>
 <body>
 <h1>부서목록</h1>
-<a href="deptInsert.do">신규부서등록</a>
-<br><br>
+<hr>
+<div><span><a class="left" href="deptInsert.do">신규부서등록</a></span></div>
+
 <table>
 	<tr>
 		<td>부서번호</td>
@@ -26,7 +34,7 @@ table, td {
 		<td>지역번호</td>
 		<td></td>
 	</tr>
-	<c:forEach items="${deptlist}" var="dept">
+	<c:forEach items="${deptlist}" var="dept" varStatus="status">
 	<tr>
 		<td>${dept.department_id}</td>
 		<td><a href="dept.do?dept_id=${dept.department_id}">${dept.department_name}</a></td>

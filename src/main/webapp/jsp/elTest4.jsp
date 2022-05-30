@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>알림</h1>
-<hr>
-<p>존재하지 않는 주소입니다.</p>
+<h1>ELTest4.jsp</h1>
+<h2>request에 넘어온 값 얻기</h2>
+<p>${blist}</p>
 </body>
 </html>

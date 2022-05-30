@@ -20,7 +20,7 @@ public class UserDAO {
 			pst = new LogPreparedStatement(conn, "select user_name, phone from tbl_users where user_id = ? and user_pass = ?");
 			pst.setString(1, user_id);
 			pst.setString(2, user_pass);
-			System.out.println(pst);
+			//System.out.println(pst);
 			rs = pst.executeQuery();
 			
 			while(rs.next()) {

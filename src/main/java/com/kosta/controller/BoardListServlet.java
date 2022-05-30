@@ -22,6 +22,7 @@ public class BoardListServlet extends HttpServlet {
 		List<BoardVO> blist = service.selectAll();
 		
 		request.setAttribute("boardDatas", blist);
+		request.setAttribute("boardSize", blist.size());
 		
 		//위임 (요청을 받은것은 servlet, 응답은 jsp가 하도록)
 		RequestDispatcher rd = request.getRequestDispatcher("boardList.jsp");

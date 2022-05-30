@@ -13,38 +13,22 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
-table, td {
-	border:1px solid black;
-	border-collapse: collapse;
-	padding: 10px;
+tr:nth-child(odd) {
+	background-color: #FFF9DD;
 }
-tr:first-child {
-	background-color: #E5E7FB;
-}
-table { 
-	margin: 30px;
-	clear:both;
-}
-h1 {
-	text-align: center;
-	padding: 20px;
-	margin: 10px;
-}
-.left {
-	float:left;
-	padding-left: 20px;
-}
-hr {clear:both;}
 </style>
+
+<link rel="stylesheet" href="../css/listCommon.css">
+
 </head>
 <body>
 <h1>BOARD LIST</h1>
 <hr>
 <div><span><a class="left" href="boardInsert.do">게시글 작성하기</a></span></div>
-<%@ include file="../common/header.jsp" %>
 
 <table>
 	<tr>
+		<td>순서</td>
 		<td>번호</td>
 		<td>제목</td>
 		<td>내용</td>
@@ -53,15 +37,17 @@ hr {clear:both;}
 		<td>수정일</td>
 		<td></td>
 	</tr>
-	<c:forEach items="${boardDatas}" var="board">
-	<tr>
+	<c:set var="listSize" value="${boardDatas.size()}"></c:set>
+	<c:forEach items="${boardDatas}" var="board" varStatus="rowStatus">
+		<%-- <td>${boardSize-rowStatus.index}</td> --%>
+		<td>${listSize - rowStatus.index}</td>
 		<td><a href="boardDetail.do?bno=${board.bno}">${board.bno}</a></td>
 		<td>${board.title}</td>
 		<td>${board.content}</td>
 		<td>${board.writer}</td>
 		<td>${board.regdate}</td>
 		<td>${board.updatedate}</td>
-		<td><button class="btnDel" data-bno="${board.bno}">삭제하기</button></td>
+		<td><button class="btnDel" data-bno="${board.bno}">삭제</button></td>
 	</tr>
 	</c:forEach>
 </table>

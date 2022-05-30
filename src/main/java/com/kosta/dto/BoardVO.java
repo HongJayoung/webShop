@@ -10,6 +10,8 @@ public class BoardVO {
 	private Date regdate;
 	private Date updatedate;
 	
+	private EmpVO emp; 
+	
 	public BoardVO() {}
 	
 	public BoardVO(String title, String content, int writer) {
@@ -27,6 +29,22 @@ public class BoardVO {
 		this.writer = writer;
 		this.regdate = regdate;
 		this.updatedate = updatedate;
+	}
+
+	public BoardVO(String title, String content, int writer, EmpVO emp) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.emp = emp;
+	}
+
+	public EmpVO getEmp() {
+		return emp;
+	}
+
+	public void setEmp(EmpVO emp) {
+		this.emp = emp;
 	}
 
 	public int getBno() {
@@ -82,8 +100,9 @@ public class BoardVO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("BoardVO [bno=").append(bno).append(", title=").append(title).append(", content=")
 				.append(content).append(", writer=").append(writer).append(", regdate=").append(regdate)
-				.append(", updatedate=").append(updatedate).append("]");
+				.append(", updatedate=").append(updatedate).append(", emp=").append(emp).append("]");
 		return builder.toString();
 	}
-	
+
+
 }
