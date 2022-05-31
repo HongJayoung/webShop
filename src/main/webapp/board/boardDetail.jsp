@@ -47,6 +47,13 @@
 	<input class="form-control"  type="text" name="writer" value = "${board.getUpdatedate()}" disabled="disabled">
 </div>
 
+<div class="form-group">
+	<label>이미지 : </label>
+	<a href="${pageContext.request.contextPath}/download.do?fileName=${board.pic}">
+		<img src="${pageContext.request.contextPath}/uploads/${board.pic}" alt="이미지" width="250" height="250">
+	</a>
+</div>
+
 <input type="submit" class="btn btn-success" value="수정">
 <input type="reset" class="btn btn-secondary" value="취소">
 </form>

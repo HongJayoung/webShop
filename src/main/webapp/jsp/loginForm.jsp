@@ -21,12 +21,12 @@
 <form action="login.do" method="post">
 <div class="form-group">
 	<label>아이디 :</label>
-	<input class="form-control" type="text" name="userid">
+	<input class="form-control" type="text" name="userid" value="jayoung">
 </div>
 
 <div class="form-group">
 	<label>비밀번호 :</label>
-	<input class="form-control" type="text" name="userpw">
+	<input class="form-control" type="text" name="userpw" value="1234">
 </div>
 
 	<input type="hidden" name="user_email" value="1234@naver.com">

@@ -1,6 +1,8 @@
 package com.kosta.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kosta.dto.BoardVO;
 import com.kosta.model.BoardService;
+import com.kosta.util.UploadFileHelper;
 
 @WebServlet("/board/boardInsert.do")
 public class BoardInsertServlet extends HttpServlet {
@@ -32,11 +35,28 @@ public class BoardInsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//request.setCharacterEncoding("utf-8"); //filter로 처리함
 		
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		int writer = Integer.parseInt(request.getParameter("writer"));
+		//String title = request.getParameter("title");
+		//String content = request.getParameter("content");
+		//int writer = Integer.parseInt(request.getParameter("writer"));
 		
-		BoardVO board = new BoardVO(0, title, content, writer, null, null);
+		//BoardVO board = new BoardVO(0, title, content, writer, null, null);
+		
+		Map<String, Object> map = (Map<String, Object>)UploadFileHelper.uploadFile("uploads", request);
+		List<String> fileNames = (List<String>)map.get("photos");
+		Map<String, String> mapParam = (Map<String, String>)map.get("params");
+		String pic = fileNames.get(0);
+		BoardVO board = new BoardVO();
+		
+		for(String key:mapParam.keySet()) {
+			if(key.equals("title")) board.setTitle(mapParam.get(key));
+			if(key.equals("content")) board.setContent(mapParam.get(key));
+			if(key.equals("writer")) board.setWriter(Integer.parseInt(mapParam.get(key)));
+		}
+		
+		board.setPic(pic);
+
+		//System.out.println(board);
+		
 		BoardService service = new BoardService();
 		int result = service.newBoard(board);
 		

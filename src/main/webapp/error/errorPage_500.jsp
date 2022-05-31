@@ -11,7 +11,6 @@
 <hr>
 <p><%=exception %></p>
 <p><%=exception.getMessage() %></p>
-<p>연락!</p>
 <%
 //console 창에 display
 exception.printStackTrace();

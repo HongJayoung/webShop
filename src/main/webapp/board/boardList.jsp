@@ -47,7 +47,7 @@ tr:nth-child(odd) {
 		<td>${board.writer}</td>
 		<td>${board.regdate}</td>
 		<td>${board.updatedate}</td>
-		<td><button class="btnDel" data-bno="${board.bno}">삭제</button></td>
+		<td><button class="btnDel btn btn-outline-secondary" data-bno="${board.bno}">삭제</button></td>
 	</tr>
 	</c:forEach>
 </table>

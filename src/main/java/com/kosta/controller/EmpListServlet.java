@@ -17,7 +17,7 @@ import com.kosta.dto.UserVO;
 import com.kosta.model.BoardService;
 import com.kosta.model.EmpService;
 
-@WebServlet("/emp/emplist.do")
+//@WebServlet("/emp/emplist.do")
 public class EmpListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

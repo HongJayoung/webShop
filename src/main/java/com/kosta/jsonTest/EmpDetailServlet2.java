@@ -1,4 +1,4 @@
-package com.kosta.controller2;
+package com.kosta.jsonTest;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,24 +9,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.kosta.dto.EmpVO;
 import com.kosta.model.EmpService;
 
-@WebServlet("/emp/duplicateCheck.do")
-public class EmpDuplicateCheckServlet extends HttpServlet {
+
+@WebServlet("/emp/empDetail2.do")
+public class EmpDetailServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String s_empid = request.getParameter("empid");
-		if(s_empid==null) return;
+		int empid = 0;
 		
-		int empid = Integer.parseInt(s_empid);
+		if(s_empid != null) {
+			empid = Integer.parseInt(s_empid);
+		}
 		
-		//DB에 직원 id가 존재하는지 체크
 		EmpService service = new EmpService();
-		EmpVO emp = service.selectById(empid);
-
-		PrintWriter out = response.getWriter();
-		out.print(emp==null?0:1); //0이면 등록가능 1이면 등록불가
+		EmpVO emp =  service.selectById(empid);
+		
+		//JSON객체 만들기
+		JSONObject obj = new JSONObject(); //{}
+		obj.put("emp_fname", emp.getFirst_name());
+		obj.put("emp_lname", emp.getLast_name());
+		
+		String jsonstr = obj.toJSONString();
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.print(jsonstr);
 	}
 }

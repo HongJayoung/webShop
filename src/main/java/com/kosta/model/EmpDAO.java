@@ -33,6 +33,7 @@ public class EmpDAO {
 	
 	static final String SQL_SELECT_ALL_MGR = "select employee_id, first_name from employees where employee_id in "
 						+ " (select distinct manager_id from employees)";
+	static final String SQL_SELECT_BY_EMAIL = "select count(*) from employees where email = ?";
 	
 	Connection conn;
 	Statement st;
@@ -336,5 +337,27 @@ public class EmpDAO {
 		}
 		
 		return mgrlist;
+	}
+	
+	//14. 이메일 중복체크
+	public int selectByEmail(String email) {
+		int result = 0;
+		conn = DBUtil.getConnection();   
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BY_EMAIL);
+			pst.setString(1, email); 
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		
+		return result;
 	}
 }

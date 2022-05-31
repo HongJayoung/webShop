@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.kosta.dto.UserVO;
 import com.kosta.model.EmpService;
 
-@WebServlet("/emp/empDelete.do")
+//@WebServlet("/emp/empDelete.do")
 public class EmpDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

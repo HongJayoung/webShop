@@ -22,7 +22,7 @@ import com.kosta.model.EmpService;
 import com.kosta.util.DateUtil;
 
 
-@WebServlet("/emp/empInsert.do")
+//@WebServlet("/emp/empInsert.do")
 public class EmpInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

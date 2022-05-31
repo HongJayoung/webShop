@@ -16,14 +16,37 @@
 
 <script>
 $(function() {
-	$("#duplicateCheckBtn").click(function() {
+	$("#empCheckBtn").click(function() {
+		var empid = $("#employee_id").val();
+		if(empid==""||empid==null) {
+			alert("직원번호는 필수입력");
+			$("#employee_id").focus(); return;
+		}
 		$.ajax({
 			url:"duplicateCheck.do",
-			data:{"empid":$("#employee_id").val()},
+			data:{"empid":empid},
 			type:"get",
 			success: function(resData) {
 				//중복:1, 중복안됨:0
-				$("#msg").html(resData==1?"사용불가":"사용가능");
+				$("#empMsg").html(resData==0?"사용가능":"사용불가");
+			},
+			fail: function() {}
+		});
+	});
+	
+	$("#emailCheckBtn").click(function() {
+		var email = $("#email").val();
+		if(email==""||email==null) {
+			alert("이메일은 필수입력");
+			$("#email").focus(); return;
+		}
+		$.ajax({
+			url:"emailDuplicateCheck.do",
+			data:{"email":email},
+			type:"get",
+			success: function(resData) {
+				//중복:1, 중복안됨:0
+				$("#emailMsg").html(resData==0?"사용가능":"사용불가");
 			},
 			fail: function() {}
 		});
@@ -39,8 +62,8 @@ $(function() {
 <div class="form-group">
 	<label>직원번호 : </label>
 	<input class="form-control" type="number" name="employee_id" id="employee_id">
-	<input class="btn btn-info" type="button" id="duplicateCheckBtn" value="중복체크">
-	<span id="msg"></span>
+	<input class="btn btn-info" type="button" id="empCheckBtn" value="중복체크">
+	<span id="empMsg"></span>
 </div>
 
 <div class="form-group">
@@ -55,7 +78,9 @@ $(function() {
 
 <div class="form-group">
 	<label>email :</label>
-	<input class="form-control" type="text"  name="email">
+	<input class="form-control" type="text"  name="email"  id="email">
+	<input class="btn btn-info" type="button" id="emailCheckBtn" value="중복체크">
+	<span id="emailMsg"></span>
 </div>
 
 <div class="form-group">
@@ -108,8 +133,16 @@ $(function() {
 <div>
 <input type="submit" class="btn btn-success" value="등록">
 <input type="reset" class="btn btn-secondary" value="취소">
+<input type="button" class="btn btn-light" value="목록" id="emplist">
 </div>
 </form>
 
+<script>
+$(function() {
+	$("#emplist").click(function() {
+		location.href="emplist.do";
+	});
+});
+</script>
 </body>
 </html>

@@ -73,4 +73,9 @@ public class EmpService {
 	public Map<Integer, String> selectAllMgr() {
 		return empDAO.selectAllMgr();
 	}
+	
+	//14. 이메일 중복체크
+	public int selectByEmail(String email) {
+		return empDAO.selectByEmail(email);
+	}
 }

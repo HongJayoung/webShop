@@ -1,57 +1,43 @@
-package com.kosta.controller;
+package com.kosta.designPattern;
 
-import java.io.IOException;
 import java.sql.Date;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kosta.dto.DeptDTO;
 import com.kosta.dto.EmpVO;
-import com.kosta.dto.UserVO;
-import com.kosta.model.DeptService;
 import com.kosta.model.EmpService;
 import com.kosta.util.DateUtil;
 
+public class EmpDetailController implements Command{
 
-//@WebServlet("/emp/empDetail.do")
-public class EmpDetailServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String empid = request.getParameter("empid");
-		int i_empid = 0;
+	@Override
+	public String execute(HttpServletRequest request) {
+		String method = request.getMethod();
+		String page = null;
 		
-		if(empid != null) {
-			i_empid = Integer.parseInt(empid);
+		if(method.equals("GET")) {
+			String empid = request.getParameter("empid");
+			int i_empid = 0;
+			
+			if(empid != null) {
+				i_empid = Integer.parseInt(empid);
+			}
+			
+			EmpService service = new EmpService();
+			request.setAttribute("emp", service.selectById(i_empid));
+			
+			page="empDetail.jsp";
+			
+		} else {
+			//수정하기
+			EmpVO emp = makeEmp(request);
+			EmpService service = new EmpService();
+			request.setAttribute("msg", service.empUpdate(emp)>0?"정보수정성공":"정보수정실패");
+			
+			page="result.jsp";
 		}
 		
-		EmpService service = new EmpService();
-		EmpVO emp =  service.selectById(i_empid);
-		request.setAttribute("emp", emp);
-		
-		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("empDetail.jsp");
-		rd.forward(request, response);
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//수정하기
-		//request.setCharacterEncoding("utf-8"); //filter로 처리함
-		EmpVO emp = makeEmp(request);
-		EmpService service = new EmpService();
-		int result = service.empUpdate(emp);
-		request.setAttribute("msg", result>0?"정보수정성공":"정보수정실패");
-		
-		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("result.jsp");
-		rd.forward(request, response);
+		return page;
 	}
 
 	private EmpVO makeEmp(HttpServletRequest request) {

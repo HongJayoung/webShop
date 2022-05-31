@@ -40,7 +40,7 @@ tr:nth-child(odd) {
 		<td><a href="dept.do?dept_id=${dept.department_id}">${dept.department_name}</a></td>
 		<td>${dept.manager_id}</td>
 		<td>${dept.location_id}</td>
-		<td><button class="btnDel" data-deptid="${dept.department_id}">삭제하기</button></td>
+		<td><button class="btnDel btn btn-outline-secondary" data-deptid="${dept.department_id}">삭제하기</button></td>
 	</tr>
 	</c:forEach>
 </table>

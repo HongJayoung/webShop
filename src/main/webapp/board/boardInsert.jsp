@@ -17,7 +17,7 @@
 <h1>NEW BOARD</h1>
 
 <hr>
-<form action="boardInsert.do" method="post">
+<form action="boardInsert.do" method="post" enctype="multipart/form-data">
 <div class="form-group">
 	<label>제목 : </label>
 	<input class="form-control"  type="text" name="title" value = "">
@@ -31,6 +31,11 @@
 <div class="form-group">
 	<label>작성자 : </label>
 	<input class="form-control"  type="text" name="writer" value = "100">
+</div>
+
+<div class="form-group">
+	<label>이미지 : </label>
+	<input type="file" name="photos">
 </div>
 
 <input type="submit" class="btn btn-success" value="등록">
